@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 export default function App() {
   const [enteredNoteText, setEnteredNoteText] = useState("");
 
-  https://aboutreact.com/functional-component-in-react-native/
+  
 
   return (
     <View style={styles.container}>
@@ -26,7 +26,7 @@ export default function App() {
 
       <View style={styles.noteOutput}>
         <Text style={styles.text}>Transposed note is:</Text>
-        <Text style={styles.textInput} placeholder="---" {enteredNoteText.split(' ')} />
+        {/* <Text style={styles.textInput} placeholder="---" {enteredNoteText.split(' ')} /> */}
       </View>
 
       <StatusBar style="auto" />
