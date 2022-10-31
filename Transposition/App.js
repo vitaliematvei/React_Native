@@ -1,32 +1,56 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 
 export default function App() {
-  const [enteredNoteText, setEnteredNoteText] = useState("");
+  const [note, setNote] = useState("");
+  const [interval, setInterval] = useState();
+  const [resultNote, setResultNote] = useState("");
+  const table = [ "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" ];
 
-  
+  const mod12 = (interval) => {
+    interval = parseInt(interval);
+    while (interval < 0) interval += 12;
+    while (interval >= 0) interval -= 12;
+    return interval;
+  };
+
+  const handleButton = () => {
+    setResultNote(note + interval);
+  };
 
   return (
     <View style={styles.container}>
-      <View style={styles.noteInput}>
+      <View style={styles.dataInput}>
         <Text style={styles.text}>
           Enter base note (use # for sharps, eg. A#):{" "}
         </Text>
         <TextInput
           style={styles.textInput}
           placeholder="A#"
-          //onChangeText={newText => setEnteredNoteText(newText)}
+          onChangeText={(newNote) => setNote(newNote)}
         />
       </View>
+
+
+      <View style={styles.dataInput}>
+        <Text style={styles.text}>
+           Enter interval in semitones: {" "}
+        </Text>
+        <TextInput
+          style={styles.textInput}
+          placeholder="12"
+          onChangeText={(newInterval) => setInterval(newInterval)}
+        />
+      </View>
+
+
       <View style={styles.btnCalculate}>
-        <Button title="Calculate" color="#ffffff" />
-        {/* <Button title="Add Goal" onPress={addGoalHandler} /> */}
+        <Button title="Calculate" color="#ffffff" onPress={handleButton} />
       </View>
 
       <View style={styles.noteOutput}>
-        <Text style={styles.text}>Transposed note is:</Text>
-        {/* <Text style={styles.textInput} placeholder="---" {enteredNoteText.split(' ')} /> */}
+        <Text style={styles.text}>Transposed note is: {resultNote}</Text>
       </View>
 
       <StatusBar style="auto" />
@@ -42,7 +66,7 @@ const styles = StyleSheet.create({
     marginTop: 75,
     padding: 20,
   },
-  noteInput: {
+  dataInput: {
     flexDirection: "row",
   },
   noteOutput: {
