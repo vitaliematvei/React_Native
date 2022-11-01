@@ -5,18 +5,41 @@ import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
 export default function App() {
   const [note, setNote] = useState("");
   const [interval, setInterval] = useState();
+  const [index, setIndex] = useState();
   const [resultNote, setResultNote] = useState("");
-  const table = [ "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B" ];
+  const table = [
+    "C",
+    "C#",
+    "D",
+    "D#",
+    "E",
+    "F",
+    "F#",
+    "G",
+    "G#",
+    "A",
+    "A#",
+    "B",
+  ];
+
 
   const mod12 = (interval) => {
     interval = parseInt(interval);
     while (interval < 0) interval += 12;
     while (interval >= 0) interval -= 12;
-    return interval;
+    setInterval(interval);
   };
 
+
   const handleButton = () => {
-    setResultNote(note + interval);
+    //mod12(interval);
+    if (!table.includes(note.toUpperCase())) setResultNote("Could not find!");
+    else {
+      for (let i = 0; i < 12; i++)
+        if (table[i] === note.toUpperCase()) temp = parseInt(interval) + i;
+      if (temp >= 12) temp -= 12;
+      setResultNote(table[temp]);
+    }
   };
 
   return (
@@ -32,18 +55,14 @@ export default function App() {
         />
       </View>
 
-
       <View style={styles.dataInput}>
-        <Text style={styles.text}>
-           Enter interval in semitones: {" "}
-        </Text>
+        <Text style={styles.text}>Enter interval in semitones: </Text>
         <TextInput
-          style={styles.textInput}
+          style={[styles.textInput, styles.intervalInsert]}
           placeholder="12"
           onChangeText={(newInterval) => setInterval(newInterval)}
         />
       </View>
-
 
       <View style={styles.btnCalculate}>
         <Button title="Calculate" color="#ffffff" onPress={handleButton} />
@@ -68,6 +87,10 @@ const styles = StyleSheet.create({
   },
   dataInput: {
     flexDirection: "row",
+    marginTop: 10,
+  },
+  intervalInsert: {
+    marginLeft: 100,
   },
   noteOutput: {
     marginTop: 25,
