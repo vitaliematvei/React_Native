@@ -1,44 +1,34 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 
 export default function App() {
   const [note, setNote] = useState("");
   const [interval, setInterval] = useState();
-  const [index, setIndex] = useState();
   const [resultNote, setResultNote] = useState("");
-  const table = [
-    "C",
-    "C#",
-    "D",
-    "D#",
-    "E",
-    "F",
-    "F#",
-    "G",
-    "G#",
-    "A",
-    "A#",
-    "B",
-  ];
-
-
-  const mod12 = (interval) => {
-    interval = parseInt(interval);
-    while (interval < 0) interval += 12;
-    while (interval >= 0) interval -= 12;
-    setInterval(interval);
-  };
-
+  const table = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
   const handleButton = () => {
-    //mod12(interval);
-    if (!table.includes(note.toUpperCase())) setResultNote("Could not find!");
-    else {
+
+    let note_index = parseInt(interval);
+    
+    if (!table.includes(note.toUpperCase()) || isNaN(note_index)) 
+      setResultNote("Could not find!");
+    else 
+    {
+      while (note_index < 0) 
+        note_index += 12;
+      while (note_index >= 12) 
+        note_index -= 12;
+
       for (let i = 0; i < 12; i++)
-        if (table[i] === note.toUpperCase()) temp = parseInt(interval) + i;
-      if (temp >= 12) temp -= 12;
-      setResultNote(table[temp]);
+        if (table[i] === note.toUpperCase())
+          note_index = note_index + i;
+
+      if (note_index >= 12) 
+        note_index -= 12;
+
+      setResultNote(table[note_index]);
     }
   };
 
@@ -51,6 +41,7 @@ export default function App() {
         <TextInput
           style={styles.textInput}
           placeholder="A#"
+          clearButtonMode="while-editing"
           onChangeText={(newNote) => setNote(newNote)}
         />
       </View>
@@ -60,6 +51,7 @@ export default function App() {
         <TextInput
           style={[styles.textInput, styles.intervalInsert]}
           placeholder="12"
+          clearButtonMode="while-editing"
           onChangeText={(newInterval) => setInterval(newInterval)}
         />
       </View>
@@ -83,7 +75,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F0F0F0",
     marginTop: 75,
+    marginBottom: 550,
     padding: 20,
+    borderRadius: 50,
   },
   dataInput: {
     flexDirection: "row",
@@ -104,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "15%",
+    width: "18%",
     marginRight: 8,
     padding: 8,
     borderRadius: 5,
