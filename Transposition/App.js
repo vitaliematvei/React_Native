@@ -57,7 +57,7 @@ export default function App() {
       </View>
 
       <View style={styles.btnCalculate}>
-        <Button title="Calculate" color="#ffffff" onPress={handleButton} />
+        <Button title="Calculate" onPress={handleButton} />
       </View>
 
       <View style={styles.noteOutput}>
@@ -75,7 +75,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F0F0F0",
     marginTop: 75,
-    marginBottom: 550,
     padding: 20,
     borderRadius: 50,
   },
@@ -104,11 +103,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   btnCalculate: {
+    overflow: 'hidden',
     marginTop: 25,
-    width: "50%",
     backgroundColor: "#4630EB",
-    borderWidth: 1,
     borderColor: "#cccccc",
-    borderRadius: 15,
+    color: "#ffffff",
+    borderRadius: 10,
+    width: "50%",
+    borderWidth: 1,
   },
 });
