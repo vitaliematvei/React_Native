@@ -1,0 +1,1 @@
+// https://dev.to/reenydavidson/building-a-to-do-list-with-react-native-and-styled-components-2148#:~:text=Building%20a%20To-Do%20List%20with%20React-Native%20and%20Styled-Components.,...%207%20Final%20Touches%20...%208%20Conclusion%20
