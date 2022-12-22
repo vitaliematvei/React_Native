@@ -1,9 +1,9 @@
-import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
 import { View, StatusBar, FlatList } from "react-native";
 import styled from "styled-components";
 
-import AddInput from "../Components/AddInput";
-import TodoList from "../Components/TodoList"
+import AddInput from "./Components/AddInput"
+import TodoList from "./Components/TodoList"
 
 export default function App() {
   const [data, setData] = useState([]);
