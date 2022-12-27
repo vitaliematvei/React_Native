@@ -4,26 +4,29 @@ import styled from "styled-components";
 export default function Empty() {
   return (
     <ComponentContainer>
-      <EmptyImage source={require("add an image here")} />
-      <EmptyText>Add To-DO.</EmptyText>
+      <EmptyImage
+        source={require("add an image here")}
+      />
+      <EmptyText>Add To-Do.</EmptyText>
     </ComponentContainer>
   );
 }
 
 const ComponentContainer = styled.View`
-    align-items: center;
-    justify-content: center;
-    height: 650px;
+  align-items: center;
+  justify-content: center;
+  height: 650px;
 `;
 
 const EmptyImage = styled.Image`
-    width: 350px;
-    height: 200px;
+  width: 350px;
+  height: 200px;
 `;
 
 const EmptyText = styled.Text`
-    color: white;
-    font-family: poppins-bold;
-    margin-top: 30px;
-    font-size: 30px;
+  color: white;
+  font-family: poppins-bold;
+  margin-top: 30px;
+  font-size: 30px;
 `;
+
